@@ -13,11 +13,13 @@
 
 
 dtb-$(CONFIG_ARCH_K3) += msc-sm2s-am62x-qc-02N0270E-module.dtb
-
+dtb-$(CONFIG_ARCH_K3) += msc-sm2s-am62x-qc-14402C1I-module.dtb
 
 
 #Enable support for device-tree overlays
 DTC_FLAGS_msc-sm2s-am62x-qc-02N0270E-module += -@
+DTC_FLAGS_msc-sm2s-am62x-qc-14402C1I-module += -@
+
 
 
 always		:= $(dtb-y)
