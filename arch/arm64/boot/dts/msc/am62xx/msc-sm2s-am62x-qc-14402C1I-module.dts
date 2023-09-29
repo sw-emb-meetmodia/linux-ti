@@ -64,8 +64,8 @@
 
 	memory@80000000 {
 		device_type = "memory";
-		/* 1G RAM */
-		reg = <0x00000000 0x80000000 0x00000000 0x40000000>;
+		/* 2G RAM */
+		reg = <0x00000000 0x80000000 0x00000000 0x80000000>;
 
 	};
 
@@ -322,12 +322,12 @@
 		clock-frequency = <12288000>;
 	};
 
-	display {
+	/* display {
 		compatible = "panel-lvds";
                 width-mm = <262>;
                 height-mm = <164>;
                 label = "WXGA (16:10)";
-                data-mapping = "vesa-24";  /* "jeida-24";*/
+                data-mapping = "vesa-24";
                 status = "okay";
 
                 panel-timing {
@@ -341,10 +341,10 @@
                         hsync-len = <4>;
                         vsync-len = <4>;
 			
-			/*hsync-active = <0>;
+			hsync-active = <0>;
                     	vsync-active = <0>;
                     	de-active = <1>;
-                    	pixelclk-active = <0>;*/
+                    	pixelclk-active = <0>;
 	
                 };
 
@@ -353,7 +353,7 @@
 					remote-endpoint = <&oldi_out0>;
 			};
 		};
-	};
+	}; */
 };
 
 &mcu_pmx0 {
@@ -1272,12 +1272,47 @@
 	};
 };
 
+&sdhci2 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-0 = <&main_mmc2_pins_default>;
+	pinctrl-names = "default";
+	/*vmmc-supply = <&wlan_3v3>;*/
+	vmmc-supply = <&wlan_1v8>;
+	bus-width = <4>;
+	ti,fails-without-test-cd;
+	non-removable;
+	disable-wp;
+	mmc-pwrseq = <&wlan_pwrseq>;
+	pm-ignore-notify;
+	cap-power-off-card;
+	/* WiFi firmware requires power to be kept while in suspend */
+	keep-power-in-suspend;
+	ti,driver-strength-ohm = <50>;
+	assigned-clocks = <&osc_32k>;
+
+	status = "okay";
+
+	brcmf: bcrmf@1 {
+		reg = <1>;
+		compatible = "brcm,bcm4329-fmac";
+	};
+};
+
 /* BT UART */
 &mcu_uart0 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&mcu_uart0_pins_default>;
 	uart-has-rtscts;
 	status = "okay";
+
+	bluetooth {
+		compatible = "brcm,bcm43438-bt";
+		/*shutdown-gpios = <&exp2 10 GPIO_ACTIVE_HIGH>;*/
+		clocks = <&osc_32k>;
+		clock-names = "extclk";
+		max-speed = <2000000>;
+	};
 };
 
 &mcu_mcan1 {
