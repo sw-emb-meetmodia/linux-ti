@@ -24,7 +24,7 @@
                 		width-mm = <154>;
                 		height-mm = <93>;
                 		label = "WVGA (15:9)";
-                		data-mapping = "jeida-24";
+                		data-mapping = "vesa-24";
                 		status = "okay";
 
                 		panel-timing {
@@ -48,5 +48,20 @@
                        };
                };
        };
+       
+       	fragment@4001 {
+       		target = <&dss_ports>;
+	        __overlay__ {
+	        	#address-cells = <1>;
+	        	#size-cells = <0>;
+	
+	        	port@0 {
+	                	reg = <0>;
+	                	oldi_out0: endpoint {
+	                        	remote-endpoint = <&lcd_in0>;
+	                	};
+	        	};
+		};
+	};
 };
 

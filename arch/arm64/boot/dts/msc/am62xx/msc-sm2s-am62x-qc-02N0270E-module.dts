@@ -1259,18 +1259,18 @@
 	pinctrl-0 = <&main_oldi0_pins_default>;
 };
 
+/*
 &dss_ports {
 	#address-cells = <1>;
 	#size-cells = <0>;
 
-	/* VP1: LVDS Output (OLDI TX 0) */
 	port@0 {
 		reg = <0>;
 		oldi_out0: endpoint {
 			remote-endpoint = <&lcd_in0>;
 		};
 	};
-};
+}; */
 
 /* BT UART */
 &mcu_uart0 {

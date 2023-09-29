@@ -52,5 +52,20 @@
                        };
                };
        };
+
+       fragment@4001 {
+        	target = <&dss_ports>;
+        	__overlay__ {
+        	        #address-cells = <1>;
+        	        #size-cells = <0>;
+
+        	        port@0 {
+				reg = <0>;
+        	        	oldi_out0: endpoint {
+        	        	         remote-endpoint = <&lcd_in0>;
+        	        	};
+        	        };
+        	};
+	};
 };
 
