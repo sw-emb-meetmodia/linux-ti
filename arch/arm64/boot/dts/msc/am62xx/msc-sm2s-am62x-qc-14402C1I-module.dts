@@ -697,6 +697,12 @@
 			AM62X_IOPAD(0x01d4, PIN_OUTPUT, 5) /*(B15) UART0_RTSn.AUDIO_EXT_REFCLK1*/
 		>;
 	};
+
+	pmic_irq_pins_default: pmic-irq-pins-default {
+		pinctrl-single,pins = <
+                        AM62X_IOPAD(0x01f4, PIN_INPUT_PULLUP, 0) /*(D16) EXTINTn*/
+                >;
+	};
 };
 
 &wkup_uart0 {
@@ -896,12 +902,16 @@
 
 	tps65219: pmic@30 {
 		compatible = "ti,tps65219";
-		reg = <0x30>;
-		ti,system-power-controller;
-		/*pinctrl-names = "default";*/
-		/*pinctrl-0 = <&pmic_irq_pins_default>;*/
-		/*interrupt-parent = <&gic500>;
-        	interrupts = <GIC_SPI 224 IRQ_TYPE_LEVEL_HIGH>;*/
+                reg = <0x30>;
+		pinctrl-names = "default";
+                pinctrl-0 = <&pmic_irq_pins_default>;
+                interrupt-parent = <&gic500>;
+                interrupts = <GIC_SPI 224 IRQ_TYPE_LEVEL_HIGH>;
+                interrupt-controller;
+                #interrupt-cells = <1>;
+
+		system-power-controller;
+                ti,power-button;
 
 		buck1-supply = <&vcc_3v3_sys>;
 		buck2-supply = <&vcc_3v3_sys>;
@@ -914,8 +924,8 @@
 		regulators {
 			buck1_reg: buck1 {
 				regulator-name = "VDD_CORE";
-				regulator-min-microvolt = <750000>;
-				regulator-max-microvolt = <1000000>;
+				regulator-min-microvolt = <850000>;
+				regulator-max-microvolt = <850000>;
 				regulator-boot-on;
 				regulator-always-on;
 			};
@@ -930,7 +940,7 @@
 
 			buck3_reg: buck3 {
 				regulator-name = "1V2_DDR";
-				regulator-min-microvolt = <1100000>;
+				regulator-min-microvolt = <1200000>;
 				regulator-max-microvolt = <1200000>;
 				regulator-boot-on;
 				regulator-always-on;
@@ -938,31 +948,32 @@
 
 			ldo1_reg: ldo1 {
 				regulator-name = "ldo1"; /*VDDSHV_SD_IO_PMIC*/
-				regulator-min-microvolt = <18000000>;
-				regulator-max-microvolt = <33000000>;
-				regulator-allow-bypass;
+				regulator-min-microvolt = <3300000>;
+				regulator-max-microvolt = <3300000>;
+				regulator-boot-on;
+                                regulator-always-on;
 			};
 
 			ldo2_reg: ldo2 {
 				regulator-name = "ldo2"; /*CARRIER_1V8*/
-				regulator-min-microvolt = <18000000>;
-				regulator-max-microvolt = <18000000>;
+				regulator-min-microvolt = <1800000>;
+				regulator-max-microvolt = <1800000>;
 				regulator-boot-on;
 				regulator-always-on;
 			};
 
 			ldo3_reg: ldo3 {
 				regulator-name = "ldo3"; /*VDDA_1V8*/
-				regulator-min-microvolt = <18000000>;
-				regulator-max-microvolt = <18000000>;
+				regulator-min-microvolt = <1800000>;
+				regulator-max-microvolt = <1800000>;
 				regulator-boot-on;
 				regulator-always-on;
 			};
 
 			ldo4_reg: ldo4 {
 				regulator-name = "ldo4"; /*VDD_PHY_2V5*/
-				regulator-min-microvolt = <25000000>;
-				regulator-max-microvolt = <25000000>;
+				regulator-min-microvolt = <2500000>;
+				regulator-max-microvolt = <2500000>;
 				regulator-boot-on;
 				regulator-always-on;
 			};
@@ -1000,7 +1011,7 @@
 	ti,driver-strength-ohm = <50>;
 	disable-wp;
 	vmmc-supply = <&vdd_mmc1>;
-	vqmmc-supply = <&vdd_sd_dv>;
+	vqmmc-supply = <&vdd_mmc1>;
 };
 
 &usbss0 {
