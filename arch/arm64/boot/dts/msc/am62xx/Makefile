@@ -18,6 +18,7 @@ dtb-$(CONFIG_ARCH_K3) += msc-sm2s-am62x-qc-14402C1I-module.dtb
 dtb-$(CONFIG_ARCH_K3) += overlay-lvds-ama-070a04.dtb
 dtb-$(CONFIG_ARCH_K3) += overlay-lvds-ama-101a07.dtb
 dtb-$(CONFIG_ARCH_K3) += overlay-lvds-ama-121a01.dtb
+dtb-$(CONFIG_ARCH_K3) += overlay-baseboard-ep1.dtb
 
 #Enable support for device-tree overlays
 DTC_FLAGS_msc-sm2s-am62x-qc-02N0270E-module += -@
@@ -25,6 +26,7 @@ DTC_FLAGS_msc-sm2s-am62x-qc-14402C1I-module += -@
 DTC_FLAGS_overlay-lvds-ama-070a04 += -@
 DTC_FLAGS_overlay-lvds-ama-101a07 += -@
 DTC_FLAGS_overlay-lvds-ama-121a01 += -@
+DTC_FLAGS_overlay-baseboard-ep1 += -@
 
 
 always		:= $(dtb-y)
