@@ -1,0 +1,83 @@
+/*
+ * Copyright (C) 2022 Avnet Embedded GmbH
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation version 2.
+ *
+ * This program is distributed "as is" WITHOUT ANY WARRANTY of any
+ * kind, whether express or implied; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+/plugin/;
+
+
+/ {
+	fragment@1000 {
+		target-path = "/";
+		__overlay__ {
+			codec_audio: sound {
+			        compatible = "simple-audio-card";
+			        simple-audio-card,name = "sm2s-am62x";
+			        simple-audio-card,format = "i2s";
+			        simple-audio-card,bitclock-master = <&dailink_master>;
+			        simple-audio-card,frame-master = <&dailink_master>;
+			        simple-audio-card,widgets =
+			                "Headphone",    "Headphone Jack",
+			                "Line", "Line In",
+			                "Microphone",   "Microphone Jack";
+
+			        simple-audio-card,audio-routing = "Mic1", "Mic Bias 1",
+			                                          "MIC1", "Mic 1",
+			                                          "Headphone Jack", "HPL",
+			                                          "Headphone Jack", "HPR",
+			                                          "Speaker", "LINE",
+			                                          "Ext Spk", "Line In",
+			                                          "Line", "Mic Bias";
+
+			        cpu_dai:simple-audio-card,cpu {
+			                sound-dai = <&mcasp0>;
+			        };
+
+			        dailink_master: simple-audio-card,codec {
+			                sound-dai = <&da7213_codec>;
+			        };
+			};
+		};
+	};
+
+	fragment@1001 {
+		target-path = "/";
+		__overlay__ {
+			clk_ext_audio_codec: clock-codec {
+			        compatible = "fixed-clock";
+			        #clock-cells = <0>;
+			        clock-frequency = <12288000>;
+			};
+		};
+	};
+
+	fragment@1002 {
+		target = <&mcu_i2c0>;
+		__overlay__ {
+			da7213_codec: da7212@1a {
+			        #sound-dai-cells = <0>;
+			        compatible = "dlg,da7213";
+			        reg = <0x1a>;
+
+			        dlg,micbias1-lvl = <3000>;
+			        dlg,micbias2-lvl = <3000>;
+
+			        VDDA-supply = <&vcc_1v8>;
+			        VDDSP-supply = <&vcc_5v0>;
+			        VDDIO-supply = <&vcc_1v8>;
+			        VDDMIC-supply= <&vcc_3v3_sys>;
+			        clocks = <&clk_ext_audio_codec>;
+			        clock-names = "mclk";
+			};
+		};
+	};
+};
