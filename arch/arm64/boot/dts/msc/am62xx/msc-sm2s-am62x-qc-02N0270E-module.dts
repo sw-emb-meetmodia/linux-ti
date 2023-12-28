@@ -884,7 +884,7 @@
 
 			ldo1_reg: ldo1 {
 				regulator-name = "ldo1"; /*VDDSHV_SD_IO_PMIC*/
-				regulator-min-microvolt = <3300000>;
+				regulator-min-microvolt = <1800000>;
 				regulator-max-microvolt = <3300000>;
 				regulator-boot-on;
                                 regulator-always-on;
@@ -947,7 +947,7 @@
 	ti,driver-strength-ohm = <50>;
 	disable-wp;
 	vmmc-supply = <&vdd_mmc1>;
-	vqmmc-supply = <&vdd_mmc1>;
+	vqmmc-supply = <&vdd_sd_dv>;
 };
 
 &usbss0 {
