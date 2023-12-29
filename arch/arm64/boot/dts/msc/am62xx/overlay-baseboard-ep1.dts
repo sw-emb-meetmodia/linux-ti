@@ -25,6 +25,7 @@
 			        simple-audio-card,format = "i2s";
 			        simple-audio-card,bitclock-master = <&dailink_master>;
 			        simple-audio-card,frame-master = <&dailink_master>;
+				simple-audio-card,mclk-fs = <256>;
 			        simple-audio-card,widgets =
 			                "Headphone",    "Headphone Jack",
 			                "Line", "Line In",
@@ -49,17 +50,6 @@
 		};
 	};
 
-	fragment@1001 {
-		target-path = "/";
-		__overlay__ {
-			clk_ext_audio_codec: clock-codec {
-			        compatible = "fixed-clock";
-			        #clock-cells = <0>;
-			        clock-frequency = <11288000>;
-			};
-		};
-	};
-
 	fragment@1002 {
 		target = <&mcu_i2c0>;
 		__overlay__ {
@@ -73,7 +63,7 @@
 			        VDDA-supply = <&vcc_3v3_sys>;
 			        VDD-supply = <&vcc_1v8>;
 			        VDDIO-supply = <&vcc_1v8>;
-			        clocks = <&clk_ext_audio_codec>;
+			        clocks = <&audio_refclk1>;
 			        clock-names = "mclk";
 			};
 		};
