@@ -926,6 +926,13 @@
 		compatible= "ricoh,r2221tl";
 		reg=<0x32>;
 	};
+
+	tpm: st33htpi@2e {
+                compatible = "st,st33htpm-i2c";
+                reg = <0x2e>;
+                status = "okay";
+        };
+
 };
 
 &main_i2c3 {
