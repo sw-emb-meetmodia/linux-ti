@@ -199,21 +199,26 @@ static int tpm_tis_i2c_probe(struct i2c_client *dev,
 	int rc;
 	const u8 loc_init = 0;
 	
+	printk("-- Line %d, File: %s\n", __LINE__, __FILE__);	
 	phy = devm_kzalloc(&dev->dev, sizeof(struct tpm_tis_i2c_phy),
 			   GFP_KERNEL);
 	if (!phy)
 		return -ENOMEM;
-
+	
+	printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 	phy->i2c_client = dev;
 	if (!i2c_check_functionality(dev->adapter, I2C_FUNC_NOSTART)) {
 		phy->iobuf = devm_kmalloc(&dev->dev, TPM_BUFSIZE, GFP_KERNEL);
 		if (!phy->iobuf)
 			return -ENOMEM;
 	}
+
+	printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 	rc = tpm_tis_i2c_write_bytes(&phy->priv, TPM_LOC_SEL, 1, &loc_init);
 	if (rc < 0)
 		return rc;
 
+	printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 	rc = csum_state_store(&phy->priv, 0x01);
 	if (rc < 0)
 		return rc;
