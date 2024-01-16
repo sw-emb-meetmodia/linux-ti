@@ -837,6 +837,12 @@
 	clock-frequency = <400000>;
 	status="okay";
 
+	st33htpi: st33htpi@2e {
+                compatible = "st,st33htpm-i2c";
+                reg = <0x2e>;
+                status = "okay";
+        };
+
 	tps65219: pmic@30 {
 		compatible = "ti,tps65219";
                 reg = <0x30>;
@@ -926,12 +932,6 @@
 		compatible= "ricoh,r2221tl";
 		reg=<0x32>;
 	};
-
-	tpm: st33htpi@2e {
-                compatible = "st,st33htpm-i2c";
-                reg = <0x2e>;
-                status = "okay";
-        };
 
 };
 

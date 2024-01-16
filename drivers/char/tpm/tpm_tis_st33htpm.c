@@ -115,6 +115,7 @@ static int tpm_tis_i2c_write_bytes(struct tpm_tis_data *data, u32 addr,
 				},
 			};
 
+			printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 			ret = i2c_transfer(phy->i2c_client->adapter, msgs,
 					   ARRAY_SIZE(msgs));
 		}
@@ -134,7 +135,7 @@ static int tpm_tis_i2c_write_bytes(struct tpm_tis_data *data, u32 addr,
 				.flags = I2C_M_NOSTART,
 			},
 		};
-
+		printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 		ret = i2c_transfer(phy->i2c_client->adapter, msgs, ARRAY_SIZE(msgs));
 	}
 
