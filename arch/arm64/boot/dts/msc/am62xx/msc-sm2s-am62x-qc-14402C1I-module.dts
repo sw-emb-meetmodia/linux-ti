@@ -834,7 +834,7 @@
 	#size-cells = <0>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&main_i2c2_pins_default>;
-	clock-frequency = <100000>;
+	clock-frequency = <400000>;
 	status="okay";
 
 	tps65219: pmic@30 {
