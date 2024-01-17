@@ -115,12 +115,6 @@ static int tpm_tis_i2c_write_bytes(struct tpm_tis_data *data, u32 addr,
 				},
 			};
 			
-			printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
-			printk("I2C Message:\n");
-			printk("  Address: 0x%X\n", msgs[0].addr);
-			printk("  Length: %d\n", msgs[0].len);
-			printk("  Buffer: %p\n", msgs[0].buf);
-			printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 			ret = i2c_transfer(phy->i2c_client->adapter, msgs,
 					   ARRAY_SIZE(msgs));
 		}
@@ -140,7 +134,6 @@ static int tpm_tis_i2c_write_bytes(struct tpm_tis_data *data, u32 addr,
 				.flags = I2C_M_NOSTART,
 			},
 		};
-		printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 		ret = i2c_transfer(phy->i2c_client->adapter, msgs, ARRAY_SIZE(msgs));
 	}
 
@@ -205,13 +198,11 @@ static int tpm_tis_i2c_probe(struct i2c_client *dev,
 	int rc;
 	const u8 loc_init = 0;
 	
-	printk("-- Line %d, File: %s\n", __LINE__, __FILE__);	
 	phy = devm_kzalloc(&dev->dev, sizeof(struct tpm_tis_i2c_phy),
 			   GFP_KERNEL);
 	if (!phy)
 		return -ENOMEM;
 	
-	printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 	phy->i2c_client = dev;
 	if (!i2c_check_functionality(dev->adapter, I2C_FUNC_NOSTART)) {
 		phy->iobuf = devm_kmalloc(&dev->dev, TPM_BUFSIZE, GFP_KERNEL);
@@ -219,12 +210,10 @@ static int tpm_tis_i2c_probe(struct i2c_client *dev,
 			return -ENOMEM;
 	}
 
-	printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 	rc = tpm_tis_i2c_write_bytes(&phy->priv, TPM_LOC_SEL, 1, &loc_init);
 	if (rc < 0)
 		return rc;
 
-	printk("-- Line %d, File: %s\n", __LINE__, __FILE__);
 	rc = csum_state_store(&phy->priv, 0x01);
 	if (rc < 0)
 		return rc;
