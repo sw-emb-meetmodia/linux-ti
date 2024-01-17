@@ -740,6 +740,12 @@
 	  line-name = "gpio0_23";
 	};
 
+	gpio0-29-hog {
+          gpio-hog;
+          gpios = <29 GPIO_ACTIVE_HIGH>;
+          output-high;
+          line-name = "tpm-rst-gpio0_23";
+        };
 };
 
 &main_gpio1 {
