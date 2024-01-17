@@ -839,6 +839,7 @@
 
 	st33htpi: st33htpi@2e {
                 compatible = "st,st33htpm-i2c";
+		reset-gpios = <&main_gpio0 29 GPIO_ACTIVE_LOW>;
                 reg = <0x2e>;
                 status = "okay";
         };
