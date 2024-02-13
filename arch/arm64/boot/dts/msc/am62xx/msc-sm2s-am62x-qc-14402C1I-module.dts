@@ -360,7 +360,7 @@
                 >;
         };
 
-	watchdog_pins_default: watchdog_pins_default {
+	watchdog_pins_default: watchdog-pins-default {
                 pinctrl-single,pins = <
                         AM62X_IOPAD(0x030, PIN_OUTPUT, 1) /*(A4) WKUP_TIMER_IO1 */
                 >;
