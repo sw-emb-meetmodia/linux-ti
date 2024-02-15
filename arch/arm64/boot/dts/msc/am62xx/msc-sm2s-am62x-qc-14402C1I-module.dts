@@ -357,14 +357,16 @@
                 pinctrl-single,pins = <
                         AM62X_IOPAD(0x040, PIN_INPUT, 0) /* (D4) MCU_MCAN1_RX */
                         AM62X_IOPAD(0x03C, PIN_OUTPUT, 0) /* (E5) MCU_MCAN1_TX */
+			AM62X_IOPAD(0x030, PIN_OUTPUT, 1)
                 >;
         };
 
+	/*
 	watchdog_pins_default: watchdog-pins-default {
                 pinctrl-single,pins = <
-                        AM62X_IOPAD(0x030, PIN_OUTPUT, 1) /*(A4) WKUP_TIMER_IO1 */
+                        AM62X_IOPAD(0x030, PIN_OUTPUT, 1)
                 >;
-        };
+        };*/
 };
 
 &main_pmx0 {
@@ -1290,7 +1292,8 @@
        assigned-clock-rates = <11289600>; /*<22579200>;*/
 };
 
+/*
 &main_rti1 {
 	pinctrl-names = "default";
         pinctrl-0 = <&watchdog_pins_default>;
-};
+};*/
