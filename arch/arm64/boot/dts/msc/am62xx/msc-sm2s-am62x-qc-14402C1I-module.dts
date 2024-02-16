@@ -327,7 +327,7 @@
         	pinctrl-names = "default";
         	pinctrl-0 = <&wake_mcugpio1_pins_default>;
         	interrupt-parent = <&mcu_gpio0>;
-        	interrupts = <03 IRQ_TYPE_EDGE_FALLING>;
+        	interrupts = <03 IRQ_TYPE_EDGE_RISING>;
         	switch {
                 	label = "MCUGPIO";
                 	linux,code = <143>;
@@ -1317,7 +1317,7 @@
 &main_rti1 {
 	pinctrl-names = "default";
         pinctrl-0 = <&watchdog_pins_default>;
-}; */
+};
 
 &mcu_gpio_intr {
 	status = "okay";
@@ -1325,4 +1325,4 @@
 
 &mcu_gpio0 {
 	status = "okay";
-};
+};*/
