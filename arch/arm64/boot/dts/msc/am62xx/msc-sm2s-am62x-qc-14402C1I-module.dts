@@ -1317,7 +1317,7 @@
 &main_rti1 {
 	pinctrl-names = "default";
         pinctrl-0 = <&watchdog_pins_default>;
-};*/
+};
 
 &mcu_gpio_intr {
 	status = "okay";
@@ -1325,4 +1325,4 @@
 
 &mcu_gpio0 {
 	status = "okay";
-};
+};*/
