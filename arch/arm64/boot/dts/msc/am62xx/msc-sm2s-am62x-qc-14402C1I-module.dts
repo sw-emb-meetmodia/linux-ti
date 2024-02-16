@@ -327,11 +327,11 @@
         	pinctrl-names = "default";
         	pinctrl-0 = <&wake_mcugpio1_pins_default>;
         	interrupt-parent = <&mcu_gpio0>;
-        	interrupts = <03 IRQ_TYPE_EDGE_RISING>;
+        	interrupts = <11 IRQ_TYPE_EDGE_RISING>;
         	switch {
                 	label = "MCUGPIO";
                 	linux,code = <143>;
-                	gpios = <&mcu_gpio0 03 GPIO_ACTIVE_LOW>;
+                	gpios = <&mcu_gpio0 11 GPIO_ACTIVE_LOW>;
                 	wakeup-source;
         	};
 	};
@@ -384,7 +384,7 @@
 
 	wake_mcugpio1_pins_default: wake-mcugpio1-pins-default {
         	pinctrl-single,pins = <
-			AM62X_MCU_IOPAD(0x00C, PIN_INPUT, 7) /* (D9) MCU_GPIO0_03 */
+			AM62X_MCU_IOPAD(0x02C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_11 */
         	>;
 	};
 };
