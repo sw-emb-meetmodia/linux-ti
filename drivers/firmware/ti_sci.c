@@ -1868,9 +1868,6 @@ static int ti_sci_cmd_set_io_isolation(const struct ti_sci_handle *handle,
 	struct ti_sci_xfer *xfer;
 	struct device *dev;
 	int ret = 0;
-	
-	/*HACK: return without doing anything; required for Sysfw LPM trace */
-	return ret;
 
 	if (IS_ERR(handle))
 		return PTR_ERR(handle);
