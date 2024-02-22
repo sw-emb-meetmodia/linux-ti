@@ -338,6 +338,7 @@
 };
 
 &mcu_pmx0 {
+	/*
 	mcu_uart0_pins_default: mcu-uart0-pins-default {
 		pinctrl-single,pins = <
 			AM62X_IOPAD(0x020, PIN_OUTPUT, 0) /* (B6) UART0_RTS */
@@ -345,7 +346,7 @@
 			AM62X_IOPAD(0x018, PIN_OUTPUT, 0) /* (A5) UART0_TXD */
 			AM62X_IOPAD(0x014, PIN_INPUT, 0) /* (B5) UART0_RXD */
 		>;
-	};
+	};*/
 
 	mcu_i2c0_pins_default: mcu-i2c0-pins-default {
 		pinctrl-single,pins = <
@@ -1279,7 +1280,7 @@
 	};
 };
 
-/* BT UART */
+/* BT UART
 &mcu_uart0 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&mcu_uart0_pins_default>;
@@ -1288,12 +1289,11 @@
 
 	bluetooth {
 		compatible = "brcm,bcm43438-bt";
-		/*shutdown-gpios = <&exp2 10 GPIO_ACTIVE_HIGH>;*/
 		clocks = <&osc_32k>;
 		clock-names = "extclk";
 		max-speed = <2000000>;
 	};
-};
+};*/
 
 &mcu_mcan1 {
         pinctrl-names = "default";
