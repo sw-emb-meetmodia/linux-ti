@@ -1322,9 +1322,9 @@
 }; */
 
 &mcu_gpio_intr {
-	status = "reserved";
+	status = "okay";
 };
 
 &mcu_gpio0 {
-	status = "reserved";
+	status = "okay";
 };
