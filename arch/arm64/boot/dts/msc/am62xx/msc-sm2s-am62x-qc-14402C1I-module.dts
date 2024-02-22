@@ -341,10 +341,10 @@
 	/*
 	mcu_uart0_pins_default: mcu-uart0-pins-default {
 		pinctrl-single,pins = <
-			AM62X_IOPAD(0x020, PIN_OUTPUT, 0) /* (B6) UART0_RTS */
-			AM62X_IOPAD(0x01c, PIN_INPUT, 0) /* (A6) UART0_CTS */
-			AM62X_IOPAD(0x018, PIN_OUTPUT, 0) /* (A5) UART0_TXD */
-			AM62X_IOPAD(0x014, PIN_INPUT, 0) /* (B5) UART0_RXD */
+			AM62X_IOPAD(0x020, PIN_OUTPUT, 0)  (B6) UART0_RTS
+			AM62X_IOPAD(0x01c, PIN_INPUT, 0)  (A6) UART0_CTS
+			AM62X_IOPAD(0x018, PIN_OUTPUT, 0)  (A5) UART0_TXD
+			AM62X_IOPAD(0x014, PIN_INPUT, 0)  (B5) UART0_RXD 
 		>;
 	};*/
 
