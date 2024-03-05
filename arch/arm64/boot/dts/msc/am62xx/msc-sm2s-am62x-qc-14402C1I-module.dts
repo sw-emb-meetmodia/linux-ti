@@ -371,8 +371,8 @@
 
         mcu_mcan2_pins_default: mcu-mcan2-pins-default {
                 pinctrl-single,pins = <
-                        AM62X_IOPAD(0x040, PIN_INPUT, 0)  (D4) MCU_MCAN1_RX
-                        AM62X_IOPAD(0x03C, PIN_OUTPUT, 0)  (E5) MCU_MCAN1_TX
+                        AM62X_IOPAD(0x040, PIN_INPUT, 0)  /*(D4) MCU_MCAN1_RX*/
+                        AM62X_IOPAD(0x03C, PIN_OUTPUT, 0) /* (E5) MCU_MCAN1_TX*/
                 >;
         };
 
