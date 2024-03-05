@@ -90,7 +90,7 @@
 			size = <0x00 0x8000000>;
 			linux,cma-default;
 		};
-
+		/*
 		rtos_ipc_memory_region: ipc-memories@9c800000 {
 			compatible = "shared-dma-pool";
 			reg = <0x00 0x9c800000 0x00 0x00300000>;
@@ -107,7 +107,7 @@
 			compatible = "shared-dma-pool";
 			reg = <0x00 0x9cc00000 0x00 0xe00000>;
 			no-map;
-		};
+		};*/
 
 		wkup_r5fss0_core0_dma_memory_region: r5f-dma-memory@9da00000 {
 			compatible = "shared-dma-pool";
@@ -327,11 +327,11 @@
         	pinctrl-names = "default";
         	pinctrl-0 = <&wake_mcugpio1_pins_default>;
         	interrupt-parent = <&mcu_gpio0>;
-        	interrupts = <16 IRQ_TYPE_EDGE_RISING>;
+		interrupts = <16 IRQ_TYPE_EDGE_FALLING>;
         	switch {
                 	label = "MCUGPIO";
                 	linux,code = <143>;
-                	gpios = <&mcu_gpio0 16 GPIO_ACTIVE_LOW>;
+			gpios = <&mcu_gpio0 11 GPIO_ACTIVE_LOW>;
                 	wakeup-source;
         	};
 	};
@@ -369,13 +369,12 @@
                 >;
         };
 
-	/*
         mcu_mcan2_pins_default: mcu-mcan2-pins-default {
                 pinctrl-single,pins = <
                         AM62X_IOPAD(0x040, PIN_INPUT, 0)  (D4) MCU_MCAN1_RX
                         AM62X_IOPAD(0x03C, PIN_OUTPUT, 0)  (E5) MCU_MCAN1_TX
                 >;
-        };*/
+        };
 
 	/*
 	watchdog_pins_default: watchdog-pins-default {
@@ -386,8 +385,7 @@
 
 	wake_mcugpio1_pins_default: wake-mcugpio1-pins-default {
         	pinctrl-single,pins = <
-			AM62X_MCU_IOPAD(0x0040, PIN_INPUT, 7) /* (D6) MCU_MCAN1_RX.MCU_GPIO0_16 */
-			/*AM62X_MCU_IOPAD(0x02C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_11 */
+			AM62X_MCU_IOPAD(0x002C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_11 */
         	>;
 	};
 };
@@ -1103,10 +1101,10 @@
 };
 
 &mailbox0_cluster0 {
-	mbox_m4_0: mbox-m4-0 {
+	/*mbox_m4_0: mbox-m4-0 {
 		ti,mbox-rx = <0 0 0>;
 		ti,mbox-tx = <1 0 0>;
-	};
+	};*/
 
 	mbox_r5_0: mbox-r5-0 {
 		ti,mbox-rx = <2 0 0>;
@@ -1179,9 +1177,10 @@
 };
 
 &mcu_m4fss {
-	mboxes = <&mailbox0_cluster0 &mbox_m4_0>;
+	/*mboxes = <&mailbox0_cluster0 &mbox_m4_0>;
 	memory-region = <&mcu_m4fss_dma_memory_region>,
-			<&mcu_m4fss_memory_region>;
+			<&mcu_m4fss_memory_region>;*/
+	status = "disabled";
 };
 
 &wkup_r5fss0_core0 {
@@ -1301,12 +1300,11 @@
         status = "okay";
 };
 
-/*
 &mcu_mcan2 {
         pinctrl-names = "default";
         pinctrl-0 = <&mcu_mcan2_pins_default>;
         status = "okay";
-};*/
+};
 
 // Set AUDIO_EXT_REFCLK1 to 25MHz
 &audio_refclk1 {
