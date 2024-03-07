@@ -331,7 +331,7 @@
         	switch {
                 	label = "MCUGPIO";
                 	linux,code = <143>;
-			gpios = <&mcu_gpio0 11 GPIO_ACTIVE_LOW>;
+			gpios = <&mcu_gpio0 11 GPIO_ACTIVE_HIGH>;
                 	wakeup-source;
         	};
 	};
