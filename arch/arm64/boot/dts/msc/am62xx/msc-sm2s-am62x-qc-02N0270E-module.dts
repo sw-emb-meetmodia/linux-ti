@@ -860,6 +860,9 @@
 	tps65219: pmic@30 {
 		compatible = "ti,tps65219";
                 reg = <0x30>;
+
+		ti,primary-pmic;
+
 		pinctrl-names = "default";
                 pinctrl-0 = <&pmic_irq_pins_default>;
                 interrupt-parent = <&gic500>;
