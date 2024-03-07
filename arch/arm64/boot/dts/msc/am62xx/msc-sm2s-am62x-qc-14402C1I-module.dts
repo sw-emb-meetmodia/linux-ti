@@ -90,7 +90,7 @@
 			size = <0x00 0x8000000>;
 			linux,cma-default;
 		};
-		/*
+
 		rtos_ipc_memory_region: ipc-memories@9c800000 {
 			compatible = "shared-dma-pool";
 			reg = <0x00 0x9c800000 0x00 0x00300000>;
@@ -107,7 +107,7 @@
 			compatible = "shared-dma-pool";
 			reg = <0x00 0x9cc00000 0x00 0xe00000>;
 			no-map;
-		};*/
+		};
 
 		wkup_r5fss0_core0_dma_memory_region: r5f-dma-memory@9da00000 {
 			compatible = "shared-dma-pool";
@@ -1101,10 +1101,10 @@
 };
 
 &mailbox0_cluster0 {
-	/*mbox_m4_0: mbox-m4-0 {
+	mbox_m4_0: mbox-m4-0 {
 		ti,mbox-rx = <0 0 0>;
 		ti,mbox-tx = <1 0 0>;
-	};*/
+	};
 
 	mbox_r5_0: mbox-r5-0 {
 		ti,mbox-rx = <2 0 0>;
@@ -1177,10 +1177,10 @@
 };
 
 &mcu_m4fss {
-	/*mboxes = <&mailbox0_cluster0 &mbox_m4_0>;
+	mboxes = <&mailbox0_cluster0 &mbox_m4_0>;
 	memory-region = <&mcu_m4fss_dma_memory_region>,
-			<&mcu_m4fss_memory_region>;*/
-	status = "disabled";
+			<&mcu_m4fss_memory_region>;
+	/*status = "disabled";*/
 };
 
 &wkup_r5fss0_core0 {
