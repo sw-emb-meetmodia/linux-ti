@@ -320,6 +320,21 @@
 			};
 		};
 	};*/
+
+	mcu_gpio_key {
+        	compatible = "gpio-keys";
+                autorepeat;
+        	pinctrl-names = "default";
+        	pinctrl-0 = <&wake_mcugpio1_pins_default>;
+        	interrupt-parent = <&mcu_gpio0>;
+		interrupts = <16 IRQ_TYPE_EDGE_FALLING>;
+        	switch {
+                	label = "MCUGPIO";
+                	linux,code = <143>;
+			gpios = <&mcu_gpio0 11 GPIO_ACTIVE_LOW>;
+                	wakeup-source;
+        	};
+	};
 };
 
 &mcu_pmx0 {
@@ -359,6 +374,12 @@
                         AM62X_IOPAD(0x03C, PIN_OUTPUT, 0) /* (E5) MCU_MCAN1_TX */
                 >;
         };
+
+	wake_mcugpio1_pins_default: wake-mcugpio1-pins-default {
+        	pinctrl-single,pins = <
+			AM62X_MCU_IOPAD(0x002C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_11 */
+        	>;
+	};
 };
 
 &main_pmx0 {
@@ -1239,3 +1260,10 @@
         status = "okay";
 };
 
+&mcu_gpio_intr {
+	status = "okay";
+};
+
+&mcu_gpio0 {
+	status = "okay";
+};
