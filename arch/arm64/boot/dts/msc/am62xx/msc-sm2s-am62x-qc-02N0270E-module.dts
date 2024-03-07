@@ -327,7 +327,7 @@
         	pinctrl-names = "default";
         	pinctrl-0 = <&wake_mcugpio1_pins_default>;
         	interrupt-parent = <&mcu_gpio0>;
-		interrupts = <16 IRQ_TYPE_EDGE_FALLING>;
+		interrupts = <11 IRQ_TYPE_EDGE_FALLING>;
         	switch {
                 	label = "MCUGPIO";
                 	linux,code = <143>;
