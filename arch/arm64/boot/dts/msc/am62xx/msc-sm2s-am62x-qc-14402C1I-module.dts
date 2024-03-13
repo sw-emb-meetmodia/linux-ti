@@ -327,15 +327,11 @@
         	pinctrl-names = "default";
         	pinctrl-0 = <&wake_mcugpio1_pins_default>;
         	interrupt-parent = <&mcu_gpio0>;
-		interrupts = <11 IRQ_TYPE_EDGE_FALLING>,
-				<3 IRQ_TYPE_EDGE_FALLING>,
-				<4 IRQ_TYPE_EDGE_FALLING>;
+		interrupts = <11 IRQ_TYPE_EDGE_FALLING>;
         	switch {
                 	label = "MCUGPIO";
                 	linux,code = <143>;
-			gpios = <&mcu_gpio0 11 GPIO_ACTIVE_LOW>,
-				<&mcu_gpio0 3 GPIO_ACTIVE_LOW>,
-				<&mcu_gpio0 4 GPIO_ACTIVE_LOW>;
+			gpios = <&mcu_gpio0 11 GPIO_ACTIVE_LOW>;
                 	wakeup-source;
         	};
 	};
@@ -380,17 +376,15 @@
                 >;
         };
 
-	watchdog_pins_default: watchdog-pins-default {
+	mcu_gpio0_pins_default: watchdog-pins-default {
                 pinctrl-single,pins = <
-                        AM62X_IOPAD(0x030, PIN_OUTPUT, 1)
+                        AM62X_IOPAD(0x030, PIN_OUTPUT, 7) /*(A4)MCU_GPIO0_12*/
                 >;
         };
 
 	wake_mcugpio1_pins_default: wake-mcugpio1-pins-default {
         	pinctrl-single,pins = <
 			AM62X_MCU_IOPAD(0x002C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_11 */
-			AM62X_MCU_IOPAD(0x000C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_3 */
-			AM62X_MCU_IOPAD(0x0010, PIN_INPUT, 7) /* (C6) MCU_GPIO0_4 */
         	>;
 	};
 };
@@ -642,7 +636,7 @@
 			/*AM62X_IOPAD(0x0030, PIN_INPUT, 7) /* (G21) OSPI0_CSn1.GPIO0_12 */
 			AM62X_IOPAD(0x0038, PIN_INPUT, 7) /* (E24) OSPI0_CSn3.GPIO0_14 */
 			AM62X_IOPAD(0x003c, PIN_INPUT, 7) /* (M25) GPMC0_AD0.GPIO0_15 */
-			/*AM62X_IOPAD(0x0040, PIN_INPUT, 7) /* (N23) GPMC0_AD1.GPIO0_16 */
+			AM62X_IOPAD(0x0040, PIN_INPUT, 7) /* (N23) GPMC0_AD1.GPIO0_16 */
 			AM62X_IOPAD(0x0044, PIN_OUTPUT, 7) /* (N24) GPMC0_AD2.GPIO0_17 */
 			AM62X_IOPAD(0x0048, PIN_INPUT, 7) /* (N25) GPMC0_AD3.GPIO0_18 */
 			AM62X_IOPAD(0x004c, PIN_INPUT, 7) /* (P24) GPMC0_AD4.GPIO0_19 */
@@ -1318,16 +1312,12 @@
        assigned-clock-rates = <11289600>; /*<22579200>;*/
 };
 
-&main_rti1 {
-	pinctrl-names = "default";
-        pinctrl-0 = <&watchdog_pins_default>;
-	status = "okay";
-};
-
 &mcu_gpio_intr {
 	status = "okay";
 };
 
 &mcu_gpio0 {
+	pinctrl-names = "default";
+        pinctrl-0 = <&mcu_gpio0_pins_default>;
 	status = "okay";
 };

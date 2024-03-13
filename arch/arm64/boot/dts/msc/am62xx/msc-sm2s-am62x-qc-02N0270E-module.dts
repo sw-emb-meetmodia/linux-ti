@@ -380,6 +380,12 @@
 			AM62X_MCU_IOPAD(0x002C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_11 */
         	>;
 	};
+
+	mcu_gpio0_pins_default: watchdog-pins-default {
+                pinctrl-single,pins = <
+                        AM62X_IOPAD(0x030, PIN_OUTPUT, 7) /*(A4)MCU_GPIO0_12*/
+                >;
+        };
 };
 
 &main_pmx0 {
@@ -1269,4 +1275,6 @@
 
 &mcu_gpio0 {
 	status = "okay";
+	pinctrl-names = "default";
+        pinctrl-0 = <&mcu_gpio0_pins_default>;
 };
