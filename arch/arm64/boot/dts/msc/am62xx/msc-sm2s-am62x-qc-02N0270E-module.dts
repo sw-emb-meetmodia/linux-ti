@@ -322,19 +322,26 @@
 	};*/
 
 	mcu_gpio_key {
-        	compatible = "gpio-keys";
+		compatible = "gpio-keys";
                 autorepeat;
-        	pinctrl-names = "default";
-        	pinctrl-0 = <&wake_mcugpio1_pins_default>;
-        	interrupt-parent = <&mcu_gpio0>;
-		interrupts = <11 IRQ_TYPE_EDGE_FALLING>;
-        	switch {
-                	label = "MCUGPIO";
-                	linux,code = <143>;
-			gpios = <&mcu_gpio0 11 GPIO_ACTIVE_HIGH>;
-                	wakeup-source;
-        	};
-	};
+                pinctrl-names = "default";
+                pinctrl-0 = <&wake_mcugpio1_pins_default>;
+                interrupt-parent = <&mcu_gpio0>;
+                interrupts = <11 IRQ_TYPE_EDGE_FALLING>,
+                                <4 IRQ_TYPE_EDGE_FALLING>;
+                switch0 {
+                        label = "MCU_GPIO0_11";
+                        linux,code = <143>;
+                        gpios = <&mcu_gpio0 11 GPIO_ACTIVE_LOW>;
+                        wakeup-source;
+                };
+                switch1{
+                        label = "MCU_GPIO0_4";
+                        linux,code = <143>;
+                        gpios = <&mcu_gpio0 4 GPIO_ACTIVE_HIGH>;
+                        wakeup-source;
+                };
+        };
 };
 
 &mcu_pmx0 {
@@ -378,6 +385,7 @@
 	wake_mcugpio1_pins_default: wake-mcugpio1-pins-default {
         	pinctrl-single,pins = <
 			AM62X_MCU_IOPAD(0x002C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_11 */
+			AM62X_MCU_IOPAD(0x0010, PIN_INPUT, 7) /* (C9) MCU_GPIO0_4 */
         	>;
 	};
 
