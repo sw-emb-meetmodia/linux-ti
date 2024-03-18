@@ -342,6 +342,30 @@
                         wakeup-source;
                 };
 	};
+
+	i2c_ids {
+                compatible = "msc,i2c-ids";
+                i2c_pm {
+                        label = "pm"; // what is displayed in "i2cdetect -l"
+                        bus = <&i2c0>; // reference to the i2c bus device
+                };
+                i2c_lcd {
+                        label = "lcd";
+                        bus = <&i2c1>;
+                };
+                i2c_gp {
+                        label = "GP";
+                        bus = <&mcu_i2c0>;
+                };
+                i2c_csi {
+                        label = "CSI";
+                        bus = <&wkup_i2c0>;
+                };
+                i2c_dev {
+                        label = "DEV";
+                        bus = <&i2c2>;
+                };
+        };
 };
 
 &mcu_pmx0 {
