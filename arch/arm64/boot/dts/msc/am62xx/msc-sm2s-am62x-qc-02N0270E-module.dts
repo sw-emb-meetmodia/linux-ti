@@ -320,6 +320,28 @@
 			};
 		};
 	};*/
+
+	mcu_gpio_key {
+		compatible = "gpio-keys";
+		autorepeat;
+		pinctrl-names = "default";
+		pinctrl-0 = <&wake_mcugpio1_pins_default>;
+		interrupt-parent = <&mcu_gpio0>;
+		interrupts = <11 IRQ_TYPE_EDGE_FALLING>,
+					<4 IRQ_TYPE_EDGE_FALLING>;
+		switch0 {
+			label = "MCU_GPIO0_11";
+			linux,code = <143>;
+			gpios = <&mcu_gpio0 11 GPIO_ACTIVE_LOW>;
+			wakeup-source;
+		};
+		switch1{
+			label = "MCU_GPIO0_4";
+			linux,code = <143>;
+			gpios = <&mcu_gpio0 4 GPIO_ACTIVE_HIGH>;
+			wakeup-source;
+		};
+	};
 };
 
 &mcu_pmx0 {
@@ -359,6 +381,19 @@
                         AM62X_IOPAD(0x03C, PIN_OUTPUT, 0) /* (E5) MCU_MCAN1_TX */
                 >;
         };
+
+	wake_mcugpio1_pins_default: wake-mcugpio1-pins-default {
+		pinctrl-single,pins = <
+			AM62X_MCU_IOPAD(0x002C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_11 */
+			AM62X_MCU_IOPAD(0x0010, PIN_INPUT, 7) /* (C9) MCU_GPIO0_4 */
+		>;
+	};
+
+	mcu_gpio0_pins_default: watchdog-pins-default {
+		pinctrl-single,pins = <
+			AM62X_IOPAD(0x030, PIN_OUTPUT, 7) /* (A4)MCU_GPIO0_12 */
+		>;
+	};
 };
 
 &main_pmx0 {
@@ -839,6 +874,9 @@
 	tps65219: pmic@30 {
 		compatible = "ti,tps65219";
                 reg = <0x30>;
+
+		ti,primary-pmic;
+
 		pinctrl-names = "default";
                 pinctrl-0 = <&pmic_irq_pins_default>;
                 interrupt-parent = <&gic500>;
@@ -1239,3 +1277,12 @@
         status = "okay";
 };
 
+&mcu_gpio_intr {
+	status = "okay";
+};
+
+&mcu_gpio0 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&mcu_gpio0_pins_default>;
+};

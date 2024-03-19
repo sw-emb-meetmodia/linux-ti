@@ -320,6 +320,29 @@
 			};
 		};
 	}; */
+
+	mcu_gpio_key {
+		compatible = "gpio-keys";
+		autorepeat;
+		pinctrl-names = "default";
+		pinctrl-0 = <&wake_mcugpio1_pins_default>;
+		interrupt-parent = <&mcu_gpio0>;
+		interrupts = <11 IRQ_TYPE_EDGE_FALLING>,
+					<4 IRQ_TYPE_EDGE_FALLING>;
+		switch0 {
+			label = "MCU_GPIO0_11";
+			linux,code = <143>;
+			gpios = <&mcu_gpio0 11 GPIO_ACTIVE_LOW>;
+			wakeup-source;
+		};
+
+		switch1{
+			label = "MCU_GPIO0_4";
+			linux,code = <143>;
+			gpios = <&mcu_gpio0 4 GPIO_ACTIVE_HIGH>;
+			wakeup-source;
+		};
+	};
 };
 
 &mcu_pmx0 {
@@ -359,6 +382,19 @@
                         AM62X_IOPAD(0x03C, PIN_OUTPUT, 0) /* (E5) MCU_MCAN1_TX */
                 >;
         };
+
+	mcu_gpio0_pins_default: watchdog-pins-default {
+		pinctrl-single,pins = <
+			AM62X_IOPAD(0x030, PIN_OUTPUT, 7) /*(A4)MCU_GPIO0_12*/
+		>;
+	};
+
+	wake_mcugpio1_pins_default: wake-mcugpio1-pins-default {
+		pinctrl-single,pins = <
+			AM62X_MCU_IOPAD(0x002C, PIN_INPUT, 7) /* (C6) MCU_GPIO0_11 */
+			AM62X_MCU_IOPAD(0x0010, PIN_INPUT, 7) /* (C9) MCU_GPIO0_4 */
+		>;
+	};
 };
 
 &main_pmx0 {
@@ -1250,15 +1286,15 @@
 };
 
 /* BT UART */
+/* DISABLE UART */
 &mcu_uart0 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&mcu_uart0_pins_default>;
 	uart-has-rtscts;
-	status = "okay";
+	status = "disabled";
 
 	bluetooth {
 		compatible = "brcm,bcm43438-bt";
-		/*shutdown-gpios = <&exp2 10 GPIO_ACTIVE_HIGH>;*/
 		clocks = <&osc_32k>;
 		clock-names = "extclk";
 		max-speed = <2000000>;
@@ -1284,3 +1320,12 @@
        assigned-clock-rates = <11289600>; /*<22579200>;*/
 };
 
+&mcu_gpio_intr {
+	status = "okay";
+};
+
+&mcu_gpio0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&mcu_gpio0_pins_default>;
+	status = "okay";
+};
