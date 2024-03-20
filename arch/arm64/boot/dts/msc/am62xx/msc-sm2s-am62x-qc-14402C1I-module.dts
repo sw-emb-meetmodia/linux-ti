@@ -621,7 +621,7 @@
 			AM62X_IOPAD(0x0068, PIN_INPUT, 7) /* (R21) GPMC0_AD11.GPIO0_26 */
 			AM62X_IOPAD(0x006c, PIN_INPUT, 7) /* (T22) GPMC0_AD12.GPIO0_27 */
 			AM62X_IOPAD(0x0070, PIN_INPUT, 7) /* (T24) GPMC0_AD13.GPIO0_28 */
-			AM62X_IOPAD(0x0074, PIN_INPUT, 7) /* (U25) GPMC0_AD14.GPIO0_29 */
+			AM62X_IOPAD(0x0074, PIN_OUTPUT_PULLUP, 7) /* (U25) GPMC0_AD14.GPIO0_29 */
 			AM62X_IOPAD(0x0078, PIN_INPUT, 7) /* (U24) GPMC0_AD15.GPIO0_30 */
 			AM62X_IOPAD(0x007c, PIN_OUTPUT, 7) /* (P25) GPMC0_CLK.GPIO0_31 */
 			/* AM62X_IOPAD(0x0084, PIN_OUTPUT, 7) /* (L23) GPMC0_ADVn_ALE.GPIO0_32 */
@@ -837,6 +837,13 @@
 	clock-frequency = <400000>;
 	status="okay";
 
+	st33htpi: st33htpi@2e {
+		compatible = "st,st33htpm-i2c";
+		reset-gpios = <&main_gpio0 29 GPIO_ACTIVE_LOW>;
+		reg = <0x2e>;
+		status = "okay";
+	};
+
 	tps65219: pmic@30 {
 		compatible = "ti,tps65219";
                 reg = <0x30>;
@@ -926,6 +933,7 @@
 		compatible= "ricoh,r2221tl";
 		reg=<0x32>;
 	};
+
 };
 
 &main_i2c3 {
